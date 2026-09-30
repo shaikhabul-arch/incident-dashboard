@@ -511,7 +511,7 @@ const esc = s => maskIds(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">"
 
 document.getElementById("lastUpd").textContent = snap.toLocaleString("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",timeZone:"UTC"})+" UTC";
 document.getElementById("sub").textContent =
-  "Snapshot computed 30 Sep 2026, 13:39 UTC from all sources (auto-refresh).toLocaleString("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",timeZone:"UTC"}) +
+  "Snapshot computed 30 Sep 2026, 14:09 UTC from all sources (auto-refresh).toLocaleString("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",timeZone:"UTC"}) +
   " UTC from JSC Zendesk and CMI emails in the Carriers inbox. Incidents only, all partners.";
 
 // Filters
@@ -702,7 +702,7 @@ document.getElementById("theme").addEventListener("click",()=>{
   try{ localStorage.setItem("theme",next); }catch(e){}
 });
 // ---------- volume, week and month views ----------
-const INCIDENTS = [{"date": "2026-09-30", "sev": "Minor", "title": "Investigation Required – Dallas Primary Link Traffic Drop and GGSN Abnormalities", "ids": ["JSC-657845"], "src": ["JSC Zendesk"], "status": "Open", "lat": {"at": "2026-09-30T11:44:57Z", "by": "Miguel García Cuartero", "text": "We apologize, but we sent you a comment regarding the wrong maintenance intervention. After reviewing several emails, we confirmed that tonight’s intervention was the following:
+const INCIDENTS = [{"date": "2026-09-30", "sev": "Minor", "title": "No suben archivos en Consola y en Core", "ids": ["JSC-658033"], "src": ["JSC Zendesk"], "status": "Open", "lat": {"at": "2026-09-30T14:01:49Z", "by": "Ingrid Conejeros", "text": "Minos See attachment for more details"}, "rec": {"start": "2026-09-30 (ticket created)", "partner": "JSC", "refs": "JSC-658033", "sevp": "Minor", "issue": "No suben archivos en Consola y en Core"}}, {"date": "2026-09-30", "sev": "Minor", "title": "Investigation Required – Dallas Primary Link Traffic Drop and GGSN Abnormalities", "ids": ["JSC-657845"], "src": ["JSC Zendesk"], "status": "Open", "lat": {"at": "2026-09-30T11:44:57Z", "by": "Miguel García Cuartero", "text": "We apologize, but we sent you a comment regarding the wrong maintenance intervention. After reviewing several emails, we confirmed that tonight’s intervention was the following:
 &nbsp;
 NEW Maintenance"}, "rec": {"start": "2026-09-30 (ticket created)", "partner": "JSC", "refs": "JSC-657845", "sevp": "Minor", "issue": "Investigation Required – Dallas Primary Link Traffic Drop and GGSN Abnormalities"}}, {"date": "2026-09-30", "sev": "Major", "title": "holafly-fw-mgmt-201-202_acl_vpn_jsc-tlv_mgmt_185.133.200.14", "ids": ["JSC-657909"], "src": ["JSC Zendesk"], "status": "Solved", "lat": {"at": "2026-09-30T09:07:45Z", "by": "Pharos Holafly", "text": ""}, "rec": {"start": "2026-09-30 (ticket created)", "partner": "JSC", "refs": "JSC-657909", "sevp": "Major", "issue": "holafly-fw-mgmt-201-202_acl_vpn_jsc-tlv_mgmt_185.133.200.14"}}, {"date": "2026-09-29", "sev": "Major", "title": "Event Notification Issue (Ecuador/Honduras/Israel)", "ids": ["JSC-657649"], "src": ["JSC Zendesk"], "status": "Open", "lat": {"at": "2026-09-29T17:33:08Z", "by": "Diego Enrique", "text": "Hi Mihai and thank you for such a prompt response.
 
@@ -983,7 +983,7 @@ function addTopScroll(box){
 function refreshTopScroll(){ document.querySelectorAll(".tbl,.tbl2").forEach(b=>{ addTopScroll(b); b._sizeTop && b._sizeTop(); }); }
 
 // ---------- #4 data freshness ----------
-const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-09-30T13:39:41.740346+00:00", "warnH": 24, "badH": 36, "note": "2083 tickets, 161 open"}, {"name": "Gmail (primary for updates)", "at": "2026-09-30T13:39:42Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-09-30T13:39:42Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-09-30T13:39:42Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-09-30T13:39:41.740346+00:00", "warnH": 24, "badH": 48, "note": "state OK", "login": true}];
+const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-09-30T14:09:48.377425+00:00", "warnH": 24, "badH": 36, "note": "2081 tickets, 162 open"}, {"name": "Gmail (primary for updates)", "at": "2026-09-30T14:09:49Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-09-30T14:09:49Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-09-30T14:09:49Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-09-30T14:09:48.377425+00:00", "warnH": 24, "badH": 48, "note": "state OK", "login": true}];
 function renderFresh(){
   const now=Date.now();
   document.getElementById("fresh").innerHTML = SOURCES.map(x=>{ const h=(now-new Date(x.at))/3600000;
