@@ -412,7 +412,21 @@ select.wkbtn{font:inherit;font-size:13px;font-weight:700;padding:7px 12px;border
   <tbody><tr><td>Jun 2026</td><td>39</td><td>48</td><td>3</td><td>44h 20m</td><td>0 / 19h 19min</td><td>100%</td></tr>
   <tr><td>Jul 2026</td><td>49</td><td>42</td><td>5</td><td>184h 41m</td><td>0 / 4h 34min</td><td>100%</td></tr>
   <tr><td>Aug 2026</td><td>38</td><td>43</td><td>8</td><td>39h 35min</td><td>58 min / 3 min</td><td>99.5% (Critical 87.5%)</td></tr></tbody></table></div>
-  <p class="muted small">Source: JSC "HOLAFLY – Governance (August 2026)". JSC counts redundancy losses in P1 duration.</p></section>
+  <p class="muted small">Source: JSC "HOLAFLY – Governance (August 2026)". JSC counts redundancy losses in P1 duration.</p>
+  <h3 style="margin-top:26px">Partner monthly figures — JSC · CMI · H3A/CSG (Holafly records)</h3>
+  <p class="muted small">Unique operational incidents per partner and month, counted by Holafly (duplicates across tickets merged; HIGH + MEDIUM confidence). Same basis for every partner, so they can be compared.</p>
+  <div class="tbl2"><table class="t2"><thead><tr><th>Month</th><th>JSC</th><th>CMI</th><th>H3A / CSG</th></tr></thead>
+  <tbody><tr><td>Jun 2026</td><td><b>30</b> <span class="muted small">· P1 7 · P2 7</span></td><td><b>2</b> <span class="muted small">· P1 0 · P2 0</span></td><td><b>4</b> <span class="muted small">· P1 1 · P2 0</span></td></tr><tr><td>Jul 2026</td><td><b>42</b> <span class="muted small">· P1 8 · P2 23</span></td><td><b>2</b> <span class="muted small">· P1 0 · P2 0</span></td><td><b>5</b> <span class="muted small">· P1 1 · P2 0</span></td></tr><tr><td>Aug 2026</td><td><b>30</b> <span class="muted small">· P1 4 · P2 13</span></td><td><b>12</b> <span class="muted small">· P1 2 · P2 3</span></td><td><b>3</b> <span class="muted small">· P1 0 · P2 0</span></td></tr><tr><td>Sep 2026</td><td><b>42</b> <span class="muted small">· P1 5 · P2 15</span></td><td><b>9</b> <span class="muted small">· P1 0 · P2 1</span></td><td><b>6</b> <span class="muted small">· P1 0 · P2 0</span></td></tr></tbody></table></div>
+  <p class="muted small">Source: Holafly_Incident_Volume_2026 (RCA tracker, JSC Zendesk/Minos, CSG Grid, CMI trouble tickets, Thales). CMI data is complete only from Aug 2026 (CMI e-mail feed starts then); before Aug, CMI counts come from the RCA tracker only. H3A-originated incidents are visible only when recorded in the tracker. Live figures: Incident Mgmt Report → Monthly Stats.</p>
+  <h3 style="margin-top:22px">CMI governance figures (Holafly records)</h3>
+  <div class="tbl2"><table class="t2"><thead><tr><th>Month</th><th>Incidents</th><th>P1 issues</th><th>P2</th><th>P3</th><th>P4</th><th>No severity</th><th>P1 duration</th><th>SLA fulfilment</th></tr></thead>
+  <tbody><tr><td>Jun 2026</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td class="muted">not reported</td><td class="muted">not reported</td></tr><tr><td>Jul 2026</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td class="muted">not reported</td><td class="muted">not reported</td></tr><tr><td>Aug 2026</td><td>12</td><td>2</td><td>3</td><td>1</td><td>0</td><td>6</td><td class="muted">not reported</td><td class="muted">not reported</td></tr><tr><td>Sep 2026</td><td>9</td><td>0</td><td>1</td><td>1</td><td>0</td><td>7</td><td class="muted">not reported</td><td class="muted">not reported</td></tr></tbody></table></div>
+  <p class="muted small">CMI: complete from Aug 2026 (CMI e-mail feed); Jun–Jul from the RCA tracker only. "No severity" = CMI trouble tickets carry no priority.</p>
+  <h3 style="margin-top:22px">H3A / CSG governance figures (Holafly records)</h3>
+  <div class="tbl2"><table class="t2"><thead><tr><th>Month</th><th>Incidents</th><th>P1 issues</th><th>P2</th><th>P3</th><th>P4</th><th>No severity</th><th>P1 duration</th><th>SLA fulfilment</th></tr></thead>
+  <tbody><tr><td>Jun 2026</td><td>4</td><td>1</td><td>0</td><td>0</td><td>3</td><td>0</td><td class="muted">not reported</td><td class="muted">not reported</td></tr><tr><td>Jul 2026</td><td>5</td><td>1</td><td>0</td><td>1</td><td>3</td><td>0</td><td class="muted">not reported</td><td class="muted">not reported</td></tr><tr><td>Aug 2026</td><td>3</td><td>0</td><td>0</td><td>1</td><td>2</td><td>0</td><td class="muted">not reported</td><td class="muted">not reported</td></tr><tr><td>Sep 2026</td><td>6</td><td>0</td><td>0</td><td>4</td><td>2</td><td>0</td><td class="muted">not reported</td><td class="muted">not reported</td></tr></tbody></table></div>
+  <p class="muted small">H3A / CSG: Holafly-submitted CSG Grid incidents + H3A incidents recorded in the RCA tracker. P1 duration and SLA fulfilment are not reported by CMI or H3A (no governance report like JSC's); they are filled in when a partner report is received.</p>
+</section>
 </div>
 <div id="view-summary" hidden>
   <section class="summary-export" id="summaryExport"></section>
@@ -421,7 +435,7 @@ select.wkbtn{font:inherit;font-size:13px;font-weight:700;padding:7px 12px;border
 </div>
 
 <script>
-const SNAPSHOT = "2026-10-01T14:10:00Z";  // Gmail read time (Zendesk/Minos sync 12:11 UTC)  // Zendesk/Minos sync time
+const SNAPSHOT = "2026-10-01T14:39:00Z";  // Gmail read time (Zendesk/Minos sync 12:11 UTC)  // Zendesk/Minos sync time
 const GROUPS = {
   A:"No update 7+ days",
   B:"Waiting on Holafly",
@@ -440,7 +454,7 @@ const R = [
  {g:"A",t:"JSC 643642",o:"Alireza Ayazi",e:"alireza.ayazi@holafly.com",p:["JSC","Comfone","Syniverse","CMI"],cmi:"—",h3a:"—",jira:"—",inc:"US QoS degradation AT&T/T-Mobile via Dallas LBO",sev:"MASSIVE",st:"Ongoing",cr:"2026-08-20",lu:"2026-09-16T11:22:00Z",lt:"JSC shared Comfone traceroutes and asked us to raise routing with Syniverse",w:"Holafly",f:"Follow-up drafted: share traceroutes with Syniverse via CMI (Eric Yang)",fl:"Opened by Diego; JSC now addresses Alireza",fm:"draft",fmd:"2026-09-25"},
  {g:"A",t:"JSC 649772 (+650112)",o:"Diego Enrique",e:"diego.enrique@holafly.com",p:["JSC","Comfone","Zayo"],cmi:"—",h3a:"—",jira:"CAN-233 (Done)",inc:"VLAN-510 Ashburn spike / Dallas outage",sev:"—",st:"Ongoing",cr:"2026-09-11",lu:"2026-09-14T11:49:00Z",lt:"Diego requested impact figures, routing split and RCA from JSC and Comfone",w:"JSC / Comfone",f:"Follow-up drafted: chase Jesús Infantes for impact data and RCA",fl:"Jira Done while Zendesk open",fm:"draft",fmd:"2026-09-25"},
  {g:"B",t:"JSC 654498",o:"Shadali Bukhari",e:"shadali.bukhari@holafly.com",p:["JSC"],cmi:"—",h3a:"—",jira:"CAN-264 (In Progress)",inc:"GGSNVM210 low traffic",sev:"Low",st:"Ongoing",cr:"2026-09-23",lu:"2026-09-24T12:36:00Z",lt:"JSC found no fault; we confirmed back to trend, still ongoing per NOC",w:"Holafly",f:"Send JSC fresh evidence or close",fl:"Jira assignee is Unni"},
- {g:"B",t:"JSC 654591",o:"Holafly Pharos (proactive monitoring)",e:"",p:["JSC","Comfone"],cmi:"—",h3a:"—",jira:"—",inc:"Loss of redundancy: sw-100g-101 eth1/49 down at 19:54 23/09; sw-100g-102 eth1/49 carrying traffic (alerts #654580/#654576, Comfone NOC-33715). Notify an issue › Network services (CORE) › Network and Servers › Other",sev:"Major (loss of redundancy)",st:"Ongoing",cr:"2026-09-23",lu:"2026-09-23T20:26:00Z",lt:"JSC filed a claim with Comfone; later reported Dallas BGP restored and asked Holafly to verify",w:"Holafly monitoring",f:"An L2 to review and take ownership; confirm eth1/49 restored and JSC to close with Comfone NOC-33715",fl:""},
+ {g:"B",t:"JSC 654591",o:"Holafly (proactive monitoring)",e:"",p:["JSC","Comfone"],cmi:"—",h3a:"—",jira:"—",inc:"Loss of redundancy: sw-100g-101 eth1/49 down at 19:54 23/09; sw-100g-102 eth1/49 carrying traffic (alerts #654580/#654576, Comfone NOC-33715). Notify an issue › Network services (CORE) › Network and Servers › Other",sev:"Major (loss of redundancy)",st:"Ongoing",cr:"2026-09-23",lu:"2026-09-23T20:26:00Z",lt:"JSC filed a claim with Comfone; later reported Dallas BGP restored and asked Holafly to verify",w:"Holafly monitoring",f:"An L2 to review and take ownership; confirm eth1/49 restored and JSC to close with Comfone NOC-33715",fl:""},
  {g:"B",t:"JSC 654111",o:"Shadali Bukhari",e:"shadali.bukhari@holafly.com",p:["JSC","Comfone","Colt"],cmi:"—",h3a:"—",jira:"CAN-263 (To Do, inferred)",inc:"Frankfurt L2 drop (Colt circuit 303908)",sev:"—",st:"Resolved – close pending",cr:"2026-09-22",lu:"2026-09-24T07:28:00Z",lt:"JSC moved it to 654515, which is resolved",w:"Holafly",f:"Close 654111",fl:""},
  {g:"B",t:"CMI TT260908795",o:"Luis Marin",e:"luis.marin@holafly.com",p:["CMI","JSC","DhiMobile"],cmi:"TT260908795",h3a:"—",jira:"JSMCA-882 (In Progress)",inc:"Maldives payload outage",sev:"Critical",st:"Ongoing",cr:"",lu:"2026-09-22T10:10:00Z",lt:"CMI is waiting for our lab test results",w:"Holafly",f:"Send test results to Eric Yang (CMI)",fl:"JSC side 642323 resolved"},
  {g:"B",t:"CMI TT260909353",o:"Pedro Méndez",e:"pedro.mendez@holafly.com",p:["CMI"],cmi:"TT260909353 (replaces TT260907254)",h3a:"—",jira:"CAN-261 (summary)",inc:"China Mobile slow browsing",sev:"—",st:"Ongoing",cr:"2026-09-19",lu:"2026-09-21T18:14:00Z",lt:"We asked CMI to keep it open while we check traces",w:"Holafly",f:"Share trace findings",fl:"Owner outside team list"},
@@ -457,14 +471,14 @@ const R = [
  {g:"C",t:"JSC 653455",o:"Alireza Ayazi",e:"alireza.ayazi@holafly.com",p:["JSC","H3A"],cmi:"—",h3a:"H3A",jira:"CAN-260 (Done)",inc:"H3A traffic decrease, 21 Sep",sev:"High",st:"Ongoing, RCA pending",cr:"2026-09-21",lu:"2026-09-22T14:41:00Z",lt:"Fix in progress, RCA requested",w:"JSC",f:"Chase RCA",fl:"Jira Done while Zendesk open"},
  {g:"C",t:"JSC 651278",o:"Alireza Ayazi",e:"alireza.ayazi@holafly.com",p:["JSC"],cmi:"—",h3a:"—",jira:"CAN-262 (In Progress)",inc:"Dallas GGSN audit / latency",sev:"High",st:"Ongoing",cr:"",lu:"2026-09-22T04:36:00Z",lt:"JSC update (thread preview only)",w:"JSC",f:"—",fl:""},
  {g:"D",t:"CMI TT260910666 (reopen TT260902496)",o:"Shadali Bukhari",e:"shadali.bukhari@holafly.com",p:["CMI"],cmi:"TT260910666",h3a:"—",jira:"CAN-225 (Done)",inc:"RUS01 browsing, government block",sev:"Medium",st:"Monitoring",cr:"2026-09-21",lu:"2026-09-24T15:55:00Z",lt:"No ETR from local government",w:"CMI",f:"Agree owner",fl:"Jira owner is Raja"},
- {g:"A",t:"JSC 582682",o:"Holafly Pharos (proactive monitoring)",e:"",p:["JSC"],cmi:"—",h3a:"—",jira:"—",inc:"DB201 → DB202 failover: SQL Server on DB201 crashed (EXCEPTION_ACCESS_VIOLATION, memory 91%); DB202 took over as primary; JSC restarted MSSQLServer on DB201 (Notify an issue › Network services (CORE) › Network and Servers › Other). Alert #582674",sev:"Loss of redundancy on core DB",st:"Ongoing",cr:"2026-02-22",lu:"2026-03-12T15:52:00Z",lt:"12 Mar: JSC (Sara Pulido) triaged and moved to L2. No update since. Same DB201→DB202 failover recurred on 6 Sep (JSC 648285, Egypt GTP-C timeouts)",w:"JSC (L2)",f:"An L2 to take ownership; ask Jesús Infantes (JSC) for L2 root cause and RCA of the DB201 SQL crash, citing the 6 Sep repeat (648285); close or merge",fl:""},
- {g:"C",t:"JSC 592589 (re #592058)",o:"Holafly Pharos (proactive monitoring)",e:"",p:["JSC"],cmi:"—",h3a:"—",jira:"—",inc:"Core DDBB blocked / Core DB failover on 22 Mar 10:55, investigation of #592058 (Notify an issue › Network services (CORE) › Network and Servers › Server failure)",sev:"Minor (SLA Minor, priority Low)",st:"Ongoing",cr:"2026-03-22",lu:"2026-03-23T10:43:00Z",lt:"Opened 23 Mar by Jesús Infantes (JSC) to investigate the Core DB failover in #592058. JSC status: Work in progress. No update since. Pattern: DB failovers also on 22 Feb (582682) and 6 Sep (648285)",w:"JSC",f:"Ask Jesús Infantes whether RCA \"20260320 Issues Due to Clean Tasks Block\" covers #592058; if yes close, if not request RCA, plus one consolidated RCA/permanent fix for the recurring Core DB failovers",fl:"stale – monitoring"},
- {g:"C",t:"JSC 615707",o:"Holafly Pharos (proactive monitoring)",e:"",p:["JSC"],cmi:"—",h3a:"—",jira:"—",inc:"Disk C:\\ alert on gaceVM201, Site2 Interxion (Notify an issue › Network services (CORE) › Network and Servers › Server failure)",sev:"Minor (SLA Minor, priority Low)",st:"Ongoing",cr:"2026-05-29",lu:"2026-09-15T07:50:00Z",lt:"Only automated CAB notices since creation (CAB 40287–40292, IIS logs C:\\→D:\\, platform \"SUMA Peru\"; gaceVM201 not listed). JSC status: Ready for CAB; assigned Dept. Systems",w:"JSC (Dept. Systems)",f:"Ask JSC to confirm the gaceVM201 disk fix/CAB date and whether the SUMA Peru CAB notices belong on this ticket; close if resolved",fl:"stale – monitoring"},
+ {g:"A",t:"JSC 582682",o:"Holafly (proactive monitoring)",e:"",p:["JSC"],cmi:"—",h3a:"—",jira:"—",inc:"DB201 → DB202 failover: SQL Server on DB201 crashed (EXCEPTION_ACCESS_VIOLATION, memory 91%); DB202 took over as primary; JSC restarted MSSQLServer on DB201 (Notify an issue › Network services (CORE) › Network and Servers › Other). Alert #582674",sev:"Loss of redundancy on core DB",st:"Ongoing",cr:"2026-02-22",lu:"2026-03-12T15:52:00Z",lt:"12 Mar: JSC (Sara Pulido) triaged and moved to L2. No update since. Same DB201→DB202 failover recurred on 6 Sep (JSC 648285, Egypt GTP-C timeouts)",w:"JSC (L2)",f:"An L2 to take ownership; ask Jesús Infantes (JSC) for L2 root cause and RCA of the DB201 SQL crash, citing the 6 Sep repeat (648285); close or merge",fl:""},
+ {g:"C",t:"JSC 592589 (re #592058)",o:"Holafly (proactive monitoring)",e:"",p:["JSC"],cmi:"—",h3a:"—",jira:"—",inc:"Core DDBB blocked / Core DB failover on 22 Mar 10:55, investigation of #592058 (Notify an issue › Network services (CORE) › Network and Servers › Server failure)",sev:"Minor (SLA Minor, priority Low)",st:"Ongoing",cr:"2026-03-22",lu:"2026-03-23T10:43:00Z",lt:"Opened 23 Mar by Jesús Infantes (JSC) to investigate the Core DB failover in #592058. JSC status: Work in progress. No update since. Pattern: DB failovers also on 22 Feb (582682) and 6 Sep (648285)",w:"JSC",f:"Ask Jesús Infantes whether RCA \"20260320 Issues Due to Clean Tasks Block\" covers #592058; if yes close, if not request RCA, plus one consolidated RCA/permanent fix for the recurring Core DB failovers",fl:"stale – monitoring"},
+ {g:"C",t:"JSC 615707",o:"Holafly (proactive monitoring)",e:"",p:["JSC"],cmi:"—",h3a:"—",jira:"—",inc:"Disk C:\\ alert on gaceVM201, Site2 Interxion (Notify an issue › Network services (CORE) › Network and Servers › Server failure)",sev:"Minor (SLA Minor, priority Low)",st:"Ongoing",cr:"2026-05-29",lu:"2026-09-15T07:50:00Z",lt:"Only automated CAB notices since creation (CAB 40287–40292, IIS logs C:\\→D:\\, platform \"SUMA Peru\"; gaceVM201 not listed). JSC status: Ready for CAB; assigned Dept. Systems",w:"JSC (Dept. Systems)",f:"Ask JSC to confirm the gaceVM201 disk fix/CAB date and whether the SUMA Peru CAB notices belong on this ticket; close if resolved",fl:"stale – monitoring"},
  {g:"C",t:"JSC 616454",o:"Diego Enrique",e:"diego.enrique@holafly.com",p:["JSC","Comfone","CMI"],cmi:"(CMI PGW group config 18 Aug)",h3a:"—",jira:"—",inc:"LBO Dallas follow-up: increase in timeouts (Incident › Mobile network (CORE) › Roaming › Data connection failure › MASSIVE)",sev:"Critical (SLA Critical, priority Urgent, MASSIVE)",st:"Ongoing",cr:"",lu:"2026-09-25T14:42:00Z",lt:"Comfone upgrade completed 24 Sep; Diego confirmed CMI added the 5 IPs (193.239.196.198–202) to the PGW group on 18 Aug; Arun noted it was notified via Change Mgmt. JSC status: Work in progress (Alberto Sanchez)",w:"JSC",f:"Ask Alberto Sanchez (JSC) to confirm Dallas LBO timeouts are back to baseline after the Comfone upgrade, then close; link with JSC 643642",fl:""},
- {g:"C",t:"JSC 656171",o:"Holafly Pharos (proactive monitoring)",e:"",p:["JSC"],cmi:"—",h3a:"—",jira:"—",inc:"WSUSVM201: 4 alerts \"server have gone too long without synchronizing with WSUS\", constant Windows Update errors in Event Viewer (Notify an issue › Network services (CORE) › Network and Servers › Other). No service impact",sev:"Minor (SLA Minor, priority Low)",st:"Ongoing",cr:"2026-09-25",lu:"2026-09-25T13:52:00Z",lt:"Opened 25 Sep by Andre Chauca (JSC) from Pharos alerts; assigned Dept. Systems. JSC status: Work in progress",w:"JSC (Dept. Systems)",f:"Pharos to confirm WSUS sync recovers on WSUSVM201; JSC to close. Check whether it relates to the 14–15 Sep WSUS/IIS log CABs seen on 615707",fl:""},
+ {g:"C",t:"JSC 656171",o:"Holafly (proactive monitoring)",e:"",p:["JSC"],cmi:"—",h3a:"—",jira:"—",inc:"WSUSVM201: 4 alerts \"server have gone too long without synchronizing with WSUS\", constant Windows Update errors in Event Viewer (Notify an issue › Network services (CORE) › Network and Servers › Other). No service impact",sev:"Minor (SLA Minor, priority Low)",st:"Ongoing",cr:"2026-09-25",lu:"2026-09-25T13:52:00Z",lt:"Opened 25 Sep by Andre Chauca (JSC) from Pharos alerts; assigned Dept. Systems. JSC status: Work in progress",w:"JSC (Dept. Systems)",f:"Pharos to confirm WSUS sync recovers on WSUSVM201; JSC to close. Check whether it relates to the 14–15 Sep WSUS/IIS log CABs seen on 615707",fl:""},
 ];
 
-const REQ = {"JSC 643642": "Diego Enrique", "JSC 649772 (+650112)": "Diego Enrique (L2, proactive)", "JSC 654498": "Shadali Bukhari", "JSC 654591": "Holafly Pharos (proactive monitoring)", "JSC 654111": "Holafly Pharos (proactive monitoring)", "JSC 655999": "Holafly Pharos (proactive monitoring)", "JSC 656173": "Alireza Ayazi (L2, proactive)", "CMI TT260912713": "Thamilarasan Mahalingam", "JSC 654135 (reopen 650353)": "Alireza Ayazi (L2, proactive)", "CMI TT260912476 / TT260912590": "Alireza Ayazi", "CMI TT260909905": "Raja Sekar", "JSC 653447 (dup 653445)": "Alireza Ayazi (L2, proactive)", "JSC 653455": "Alireza Ayazi (L2, proactive)", "CMI TT260910666 (reopen TT260902496)": "Shadali Bukhari", "JSC 615707": "Holafly Pharos (proactive monitoring)", "JSC 592589 (re #592058)": "Holafly Pharos (proactive monitoring)", "JSC 656171": "Holafly Pharos (proactive monitoring)", "JSC 582682": "Holafly Pharos (proactive monitoring)", "JSC 616454": "Diego Enrique (L2, proactive)"};
+const REQ = {"JSC 643642": "Diego Enrique", "JSC 649772 (+650112)": "Diego Enrique (L2, proactive)", "JSC 654498": "Shadali Bukhari", "JSC 654591": "Holafly (proactive monitoring)", "JSC 654111": "Holafly (proactive monitoring)", "JSC 655999": "Holafly (proactive monitoring)", "JSC 656173": "Alireza Ayazi (L2, proactive)", "CMI TT260912713": "Thamilarasan Mahalingam", "JSC 654135 (reopen 650353)": "Alireza Ayazi (L2, proactive)", "CMI TT260912476 / TT260912590": "Alireza Ayazi", "CMI TT260909905": "Raja Sekar", "JSC 653447 (dup 653445)": "Alireza Ayazi (L2, proactive)", "JSC 653455": "Alireza Ayazi (L2, proactive)", "CMI TT260910666 (reopen TT260902496)": "Shadali Bukhari", "JSC 615707": "Holafly (proactive monitoring)", "JSC 592589 (re #592058)": "Holafly (proactive monitoring)", "JSC 656171": "Holafly (proactive monitoring)", "JSC 582682": "Holafly (proactive monitoring)", "JSC 616454": "Diego Enrique (L2, proactive)"};
 R.forEach(r => { r.rq = REQ[r.t] || "Not verified"; });
 
 const SEV_LABEL = {1:"Critical (P1)",2:"Major (P2)",3:"Medium (P3)",4:"Minor (P4)",0:"Not assessed"};
@@ -522,7 +536,7 @@ const snap = new Date(SNAPSHOT);
 })();
 R.forEach(r => { if(r.zst) r.st2 = ZSTAT[r.zst] || r.st2; });
 R.forEach(r => { r.d = r.lu ? Math.floor((snap - new Date(r.lu)) / 86400000) : null;
-  if(r.zst && r.g!=="U"){ const pharos=/Pharos/.test(r.o); r.g = r.st2==="Closed" ? "E" : (!pharos && r.d>=7) ? "A" : (r.st2==="Pending (Holafly)" || r.st2==="Resolved – close pending") ? "B" : r.st2==="Monitoring" ? "D" : "C"; } });
+  if(r.zst && r.g!=="U"){ const pharos=/Pharos|proactive monitoring/i.test(r.o); r.g = r.st2==="Closed" ? "E" : (!pharos && r.d>=7) ? "A" : (r.st2==="Pending (Holafly)" || r.st2==="Resolved – close pending") ? "B" : r.st2==="Monitoring" ? "D" : "C"; } });
 for(let i=R.length-1;i>=0;i--) if(R[i].g==="E") R.splice(i,1);   // closed in Zendesk: no longer open
 
 const fmtDate = s => { if(!s) return "—"; const d=new Date(s); return d.toLocaleDateString("en-GB",{day:"2-digit",month:"short",timeZone:"UTC"}); };
@@ -781,7 +795,7 @@ function renderMonth(){
   const a=cards[0].n,b=cards[1].n, pct=a?Math.round((b-a)/a*100):0;
   document.getElementById("mom").innerHTML=`Month over month: <span class="${pct>0?"up":"down"}">${pct>0?"+":""}${pct}%</span> · ${a} → ${b} incidents (last two complete months)`;
 }
-const VIEWS=[["open","Open incidents"],["volume","Weekly volume"],["month","Month details"],["leaver","Leaver hand-over"]];
+const VIEWS=[["open","Open incidents"],["volume","Weekly volume"],["month","Monthly Details"],["leaver","Leaver hand-over"]];
 // every ISO week from the first week with data up to the current week, newest first
 function weekList(){ const ws=ALL.map(x=>x.week).filter(w=>w>0&&w<=CUR_WEEK); const first=ws.length?Math.min(...ws):CUR_WEEK;
   const out=[]; for(let w=CUR_WEEK; w>=first; w--) out.push(w); return out; }
@@ -852,7 +866,7 @@ function addTopScroll(box){
 function refreshTopScroll(){ document.querySelectorAll(".tbl,.tbl2").forEach(b=>{ addTopScroll(b); b._sizeTop && b._sizeTop(); }); }
 
 // ---------- #4 data freshness ----------
-const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-01T14:10:13.447433+00:00", "warnH": 24, "badH": 36, "note": "2089 tickets, 167 open"}, {"name": "Gmail (primary for updates)", "at": "2026-10-01T14:10:16Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-01T14:10:16Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-01T14:10:16Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-01T14:10:13.447433+00:00", "warnH": 24, "badH": 48, "note": "state OK", "login": true}];
+const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-01T14:39:51.826676+00:00", "warnH": 24, "badH": 36, "note": "2088 tickets, 166 open"}, {"name": "Gmail (primary for updates)", "at": "2026-10-01T14:39:55Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-01T14:39:55Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-01T14:39:55Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-01T14:39:51.826676+00:00", "warnH": 24, "badH": 48, "note": "state OK", "login": true}];
 function renderFresh(){
   const now=Date.now();
   document.getElementById("fresh").innerHTML = SOURCES.map(x=>{ const h=(now-new Date(x.at))/3600000;
@@ -878,7 +892,7 @@ const ACTION_RANK = r => (r.g==="L"?0 : r.g==="A"?1 : r.st2==="Pending (Holafly)
 function needsAction(r){ return r.g==="A" || r.g==="L" || r.st2==="Pending (Holafly)" || r.st2==="Resolved – close pending"; }
 function renderMine(){
   const fo=document.getElementById("fOwner").value;
-  const owners=[...new Set(R.map(r=>r.o))].sort((a,b)=>(/Pharos|Unassigned/.test(a)-/Pharos|Unassigned/.test(b))||a.localeCompare(b));
+  const owners=[...new Set(R.map(r=>r.o))].sort((a,b)=>(/Pharos|proactive monitoring|Unassigned/i.test(a)-/Pharos|proactive monitoring|Unassigned/i.test(b))||a.localeCompare(b));
   document.getElementById("minePills").innerHTML = `<button type="button" class="pill" data-o="" aria-pressed="${!fo}">Everyone <b>${R.length}</b></button>` +
     owners.map(o=>{ const rows=R.filter(r=>r.o===o), act=rows.filter(needsAction).length;
       return `<button type="button" class="pill" data-o="${esc(o)}" aria-pressed="${fo===o}">${esc(o==="Not verified"?"No owner yet":o.replace(" (proactive monitoring)",""))} <b>${rows.length}</b>${act?`<span class="act" title="need action now">${act} to act</span>`:""}</button>`; }).join("");
@@ -904,7 +918,7 @@ const FU_SEED = {                     // drafts already prepared in Gmail on 25 
 const FU_BUSY = {}, FU_MSG = {};
 let MCP = null, DB = null;
 const fuId = r => (r.t.match(/^(JSC|CMI)\s+(\S+)/)||[]).slice(1).join("-") || r.t.replace(/[^A-Za-z0-9]+/g,"-");
-const fuEligible = r => r.e && !/Pharos|Unassigned|Not verified/i.test(r.o) && !(r.g==="L");
+const fuEligible = r => r.e && !/Pharos|proactive monitoring|Unassigned|Not verified/i.test(r.o) && !(r.g==="L");
 const fuState = r => FU[fuId(r)] || FU_SEED[fuId(r)] || null;
 function fuEmail(r){
   const first=(r.o||"").split(" ")[0]||"team";
@@ -947,7 +961,7 @@ async function fuSend(r){
   FU_BUSY[id]=false; render();
 }
 function fuDraftCell(r){
-  if(!fuEligible(r)) return `<span class="muted">${/Pharos/.test(r.o)?"Not applicable – monitoring owner":"—"}</span>`;
+  if(!fuEligible(r)) return `<span class="muted">${/Pharos|proactive monitoring/i.test(r.o)?"Not applicable – monitoring owner":"—"}</span>`;
   const id=fuId(r), st=fuState(r), msg=FU_MSG[id]?`<div class="fumsg">${esc(FU_MSG[id])}</div>`:"";
   if(st&&st.sentAt) return `<span class="fm fm-sent">Follow up mail sent to incident owner</span><br><span class="muted" style="font-size:12px">${fmtDate(st.sentAt)} to ${esc(st.to||r.e)}</span>`;
   if(st&&st.draftId) return `<span class="fm fm-draft">Draft ready, not sent</span><br><span class="muted" style="font-size:12px">${fmtDate(st.createdAt)} to ${esc(st.to||r.e)}</span><br><a class="fulink" href="${esc(st.viewUrl||"https://mail.google.com/mail/#drafts")}" target="_blank" rel="noopener">Open draft to verify ↗</a>${msg}`;
@@ -1502,7 +1516,7 @@ const RULES_VERSION = "HI-1.0";
 const SEVN = {1:"Critical (P1)",2:"Major (P2)",3:"Medium (P3)",4:"Minor (P4)",0:"Not assessed"};
 const SEVK2 = {"Critical":1,"Major":2,"Medium":3,"Minor":4,"Not assessed":0};
 const HOLAFLY_NAMES = /(alireza|diego|shadali|luis|raja|unni|thamil|deebu|pedro|arun|arief|shaikh|carina|akshay|marvin|norberto|armando|holafly)/i;
-const ACTIVE_OWNER = n => n && !/Pharos|Unassigned|Not verified|Armando/i.test(n);
+const ACTIVE_OWNER = n => n && !/Pharos|proactive monitoring|Unassigned|Not verified|Armando/i.test(n);
 const now = () => snap;   // evaluate against the data snapshot time, not the browser clock
 
 // ---------- canonical incident index (reads R / INCIDENTS / ZD; stores nothing) ----------
@@ -1573,7 +1587,7 @@ function healthOf(c){
   // OWNERSHIP
   if(/Armando/i.test(c.owner.assigned)) out.push(H("OWNERSHIP","RED","Assigned owner has left the company; no hand-over recorded.",ev("Assigned",c.owner.assigned)));
   else if(/Unassigned|^Not verified$/i.test(c.owner.assigned)) out.push(H("OWNERSHIP","RED","No valid active incident owner found.",ev("Assigned",c.owner.assigned)));
-  else if(/Pharos/i.test(c.owner.assigned)) out.push(H("OWNERSHIP","AMBER","Raised by Holafly proactive monitoring; no Holafly L2 has taken it yet.",ev("Assigned",c.owner.assigned)));
+  else if(/Pharos|proactive monitoring/i.test(c.owner.assigned)) out.push(H("OWNERSHIP","AMBER","Raised by Holafly proactive monitoring; no Holafly L2 has taken it yet.",ev("Assigned",c.owner.assigned)));
   else out.push(H("OWNERSHIP","GREEN","Active owner identified.",[`Assigned: ${c.owner.assigned}`, `Requester: ${c.owner.requester}`]));
   // INVESTIGATION (activity on the incident)
   if(closed) out.push(H("INVESTIGATION","GREEN","Incident closed.",ev("Status",c.status)));
@@ -3760,7 +3774,7 @@ function renderIncident(key){
     <p class="muted small">Deterministic rules (${esc(h.rule)}), no AI scoring. Every state shows its reason${MODE==="eng"?" and evidence":""}. Overall = RED if any dimension is RED, AMBER if any is AMBER, UNKNOWN only when nothing can be assessed.</p>
     <div class="icc-health">${h.dims.map(dimCard).join("")}</div>
     <details class="icc-eng" style="margin-top:10px"><summary class="small">How each dimension is calculated</summary><ul class="small">
-      <li><b>Ownership</b>: GREEN named active L2 · AMBER Pharos (no L2 yet) · RED unassigned or leaver.</li>
+      <li><b>Ownership</b>: GREEN named active L2 · AMBER Holafly proactive monitoring (no L2 yet) · RED unassigned or leaver.</li>
       <li><b>Investigation</b>: days since last update — GREEN &lt;3 · AMBER 3–6 · RED 7+.</li>
       <li><b>Mitigation</b>: GREEN mitigation time recorded · AMBER workaround mentioned without time · RED none for P1/P2.</li>
       <li><b>Vendor response</b>: GREEN partner answered / waiting on us · AMBER/RED no verified partner update since Holafly's last message (RED after 3 days).</li>
