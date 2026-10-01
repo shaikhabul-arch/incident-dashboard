@@ -145,6 +145,12 @@ header{position:relative}
 .tabs button{font:inherit;font-weight:800;border:0;cursor:pointer;border-radius:16px;padding:12px 18px;min-height:44px;line-height:1.2;background:rgba(255,255,255,.18);color:#fff}
 .tabs button[aria-selected="true"]{background:#fff;color:var(--brand2);box-shadow:0 6px 18px rgba(80,0,30,.18)}
 .tabs button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.tabs .tabdd{font-weight:800;cursor:pointer;border-radius:16px;padding:8px 14px;min-height:44px;line-height:1.2;background:rgba(255,255,255,.18);color:#fff;display:flex;flex-direction:column;justify-content:center}
+.tabs .tabdd[aria-selected="true"]{background:#fff;color:var(--brand2);box-shadow:0 6px 18px rgba(80,0,30,.18)}
+.tabs .tabdd:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.tabs .tabdd select{font:inherit;font-size:13px;font-weight:700;color:inherit;background:transparent;border:0;cursor:pointer;padding:0;margin-top:2px}
+.tabs .tabdd select option{color:#1D1C1D}
+.staleMore{font:inherit;border:0;background:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer}
 .card2{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin:18px 0}
 .card2 h2{margin:0 0 4px;font-size:20px}.small{font-size:13px;margin:0 0 14px}
 .vchart{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;align-items:end;height:260px;border-bottom:1px solid var(--line);padding-top:24px}
@@ -411,7 +417,7 @@ header{position:relative}
 </div>
 
 <script>
-const SNAPSHOT = "2026-09-30T12:11:00Z";  // Gmail read time (Zendesk/Minos sync 12:11 UTC)  // Zendesk/Minos sync time
+const SNAPSHOT = "2026-10-01T11:30:00Z";  // Gmail read time (Zendesk/Minos sync 12:11 UTC)  // Zendesk/Minos sync time
 const GROUPS = {
   A:"No update 7+ days",
   B:"Waiting on Holafly",
@@ -511,7 +517,7 @@ const esc = s => maskIds(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">"
 
 document.getElementById("lastUpd").textContent = snap.toLocaleString("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",timeZone:"UTC"})+" UTC";
 document.getElementById("sub").textContent =
-  "Snapshot computed 01 Oct 2026, 11:00 UTC from all sources (auto-refresh).toLocaleString("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",timeZone:"UTC"}) +
+  "Snapshot computed 01 Oct 2026, 11:30 UTC from all sources (auto-refresh).toLocaleString("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",timeZone:"UTC"}) +
   " UTC from JSC Zendesk and CMI emails in the Carriers inbox. Incidents only, all partners.";
 
 // Filters
@@ -912,7 +918,7 @@ const ALL = INCIDENTS.map(o => { const reg = o.ids.map(x=>REGBY[x]).find(Boolean
 function fmtLat(x){ if(!x.latAt) return `<span class="muted">${esc(x.latText)}</span>`; const d=new Date(x.latAt); const days=Math.floor((snap-d)/86400000);
   return `<b>${fmtShort(d)}</b> <span class="muted">(${days<=0?"today":days+"d ago"}, ${esc(x.latBy)})</span><br>${esc(x.latText)}`; }
 const CUR_WEEK = isoWeek(snap);
-const WEEK_TABS = [CUR_WEEK-1, CUR_WEEK, CUR_WEEK+1];
+const WEEK_TABS = [CUR_WEEK-1, CUR_WEEK, CUR_WEEK+1];   // kept for compatibility; weeks are now in the Weekly volume dropdown (WEEK_LIST)
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const fmtShort = d => d.getUTCDate()+" "+MONTHS[d.getUTCMonth()];
 function sevCounts(list){ const c={1:0,2:0,3:0,4:0,0:0}; list.forEach(x=>c[x.sv]++); return c; }
@@ -956,12 +962,21 @@ function renderMonth(){
   const a=cards[0].n,b=cards[1].n, pct=a?Math.round((b-a)/a*100):0;
   document.getElementById("mom").innerHTML=`Month over month: <span class="${pct>0?"up":"down"}">${pct>0?"+":""}${pct}%</span> · ${a} → ${b} incidents (last two complete months)`;
 }
-const VIEWS=[["open","Open incidents"],["volume","Weekly volume"],...WEEK_TABS.map(w=>["week:"+w,"Week "+w]),["month","Month details"],["leaver","Leaver hand-over"]];
+const VIEWS=[["open","Open incidents"],["volume","Weekly volume"],["month","Month details"],["leaver","Leaver hand-over"]];
+// every ISO week from the first week with data up to the current week, newest first
+function weekList(){ const ws=ALL.map(x=>x.week).filter(w=>w>0&&w<=CUR_WEEK); const first=ws.length?Math.min(...ws):CUR_WEEK;
+  const out=[]; for(let w=CUR_WEEK; w>=first; w--) out.push(w); return out; }
 let CURRENT_VIEW="open";
 function showView(key){
-  document.getElementById("tabs").innerHTML=VIEWS.map(([k,l])=>`<button role="tab" data-k="${k}" aria-selected="${k===key}">${l}</button>`).join("");
-  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>showView(b.dataset.k));
   const [v,arg]=key.split(":");
+  document.getElementById("tabs").innerHTML=VIEWS.map(([k,l])=> k==="volume"
+    ? `<div class="tabdd" role="tab" tabindex="0" data-k="volume" aria-selected="${v==="volume"||v==="week"}">${l}<select id="wkSel" aria-label="Choose a week"><option value="volume">All weeks</option>${weekList().map(w=>`<option value="week:${w}"${v==="week"&&+arg===w?" selected":""}>Week ${w}${w===CUR_WEEK?" (current)":""}</option>`).join("")}</select></div>`
+    : `<button role="tab" data-k="${k}" aria-selected="${k===key}">${l}</button>`).join("");
+  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>showView(b.dataset.k));
+  const dd=document.querySelector("#tabs .tabdd"), sel=document.getElementById("wkSel");
+  if(dd){ dd.onclick=e=>{ if(e.target!==sel) showView(sel.value); };
+          dd.onkeydown=e=>{ if((e.key==="Enter"||e.key===" ")&&e.target===dd){ e.preventDefault(); showView(sel.value); } };
+          sel.onchange=()=>showView(sel.value); }
   document.querySelectorAll('[id^="view-"]').forEach(el=>el.hidden = (el.id!=="view-"+v));
   CURRENT_VIEW=key;
   if(v==="icc" && typeof window.renderICC==="function") window.renderICC(arg);
@@ -991,7 +1006,7 @@ function addTopScroll(box){
 function refreshTopScroll(){ document.querySelectorAll(".tbl,.tbl2").forEach(b=>{ addTopScroll(b); b._sizeTop && b._sizeTop(); }); }
 
 // ---------- #4 data freshness ----------
-const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-01T11:00:24.039547+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-01T11:00:26Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-01T11:00:26Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-01T11:00:26Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-01T11:00:24.039547+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
+const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-01T11:30:13.861555+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-01T11:30:15Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-01T11:30:15Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-01T11:30:15Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-01T11:30:13.861555+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
 function renderFresh(){
   const now=Date.now();
   document.getElementById("fresh").innerHTML = SOURCES.map(x=>{ const h=(now-new Date(x.at))/3600000;
@@ -1289,7 +1304,11 @@ function renderStaleBanner(){
   const staleList=R.filter(r=>r.d!==null && r.d>=7 && r.st2!=="Closed" && r.st2!=="Resolved – close pending").sort((a,b)=>(b.d||0)-(a.d||0));
   if(!staleList.length){ el.hidden=true; return; }
   el.hidden=false;
-  el.innerHTML=`<h3>⚠ ${staleList.length} stale incident${staleList.length>1?"s":""} — no update for 7+ days</h3><ul>${staleList.slice(0,8).map(r=>`<li><b>${esc(r.t)}</b> — ${r.d}d idle · ${esc(r.sev)} · owner: ${esc(r.o)} · ${esc(r.st2)}</li>`).join("")}${staleList.length>8?`<li class="muted">… and ${staleList.length-8} more</li>`:""}</ul>`;
+  el.innerHTML=`<h3>⚠ ${staleList.length} stale incident${staleList.length>1?"s":""} — no update for 7+ days</h3><ul>${staleList.map((r,i)=>`<li${i>=8?' class="staleX" hidden':''}><b>${esc(r.t)}</b> — ${r.d}d idle · ${esc(r.sev)} · owner: ${esc(r.o)} · ${esc(r.st2)}</li>`).join("")}${staleList.length>8?`<li class="muted"><button type="button" class="staleMore" aria-expanded="false">… and ${staleList.length-8} more</button></li>`:""}</ul>`;
+  const more=el.querySelector(".staleMore");
+  if(more) more.onclick=()=>{ const open=more.getAttribute("aria-expanded")!=="true";
+    el.querySelectorAll(".staleX").forEach(li=>li.hidden=!open);
+    more.setAttribute("aria-expanded",String(open)); more.textContent=open?"Show less":`… and ${staleList.length-8} more`; };
 }
 
 // ---------- Feature: Recurring incident detector ----------
