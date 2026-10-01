@@ -435,7 +435,7 @@ select.wkbtn{font:inherit;font-size:13px;font-weight:700;padding:7px 12px;border
 </div>
 
 <script>
-const SNAPSHOT = "2026-10-01T20:00:00Z";  // Gmail read time (Zendesk/Minos sync 12:11 UTC)  // Zendesk/Minos sync time
+const SNAPSHOT = "2026-10-01T20:30:00Z";  // Gmail read time (Zendesk/Minos sync 12:11 UTC)  // Zendesk/Minos sync time
 const GROUPS = {
   A:"No update 7+ days",
   B:"Waiting on Holafly",
@@ -866,7 +866,7 @@ function addTopScroll(box){
 function refreshTopScroll(){ document.querySelectorAll(".tbl,.tbl2").forEach(b=>{ addTopScroll(b); b._sizeTop && b._sizeTop(); }); }
 
 // ---------- #4 data freshness ----------
-const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-01T20:00:20.766746+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-01T20:00:24Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-01T20:00:24Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-01T20:00:24Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-01T20:00:20.766746+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
+const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-01T20:30:14.930992+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-01T20:30:16Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-01T20:30:16Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-01T20:30:16Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-01T20:30:14.930992+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
 function renderFresh(){
   const now=Date.now();
   document.getElementById("fresh").innerHTML = SOURCES.map(x=>{ const h=(now-new Date(x.at))/3600000;
