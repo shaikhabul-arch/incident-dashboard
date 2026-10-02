@@ -364,7 +364,7 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
   <input id="syncZdPass" type="password" placeholder="••••••••" style="margin-bottom:10px">
   <label style="display:block;font-size:13px;font-weight:600;margin:0 0 4px">Apps Script web app URL <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
   <input id="syncAsUrl" type="url" placeholder="https://script.google.com/macros/s/…/exec" style="margin-bottom:14px">
-  <p style="font-size:12px;color:var(--muted);margin:0 0 14px">Credentials are stored in your browser only (localStorage) — never sent to the server or committed to code.</p>
+  <p style="font-size:12px;color:var(--muted);margin:0 0 14px">Credentials here are stored in your browser (localStorage) as a fallback.<br><b>Preferred:</b> set <code>ZENDESK_EMAIL</code> + <code>ZENDESK_PASSWORD</code> (or <code>ZENDESK_TOKEN</code>) in Vercel → Settings → Environment Variables — the server-side proxy uses those first.</p>
   <div style="display:flex;gap:8px">
     <button type="button" class="btn2" id="syncSettingsSave" style="font-weight:700">Save</button>
     <button type="button" class="btn2" id="syncSettingsClose">Cancel</button>
@@ -464,7 +464,7 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
 </div>
 
 <script>
-const SNAPSHOT = "2026-10-02T07:00:00Z";  // Gmail read time (Zendesk/Minos sync 03:30 UTC)  // Zendesk/Minos sync time
+const SNAPSHOT = "2026-10-02T07:30:00Z";  // Gmail read time (Zendesk/Minos sync 03:30 UTC)  // Zendesk/Minos sync time
 const GROUPS = {
   A:"No update 7+ days",
   B:"Waiting on Holafly",
@@ -895,7 +895,7 @@ function addTopScroll(box){
 function refreshTopScroll(){ document.querySelectorAll(".tbl,.tbl2").forEach(b=>{ addTopScroll(b); b._sizeTop && b._sizeTop(); }); }
 
 // ---------- #4 data freshness ----------
-const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-02T07:00:11.682924+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-02T07:00:13Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-02T07:00:13Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-02T07:00:13Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-02T07:00:11.682924+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
+const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-02T07:30:10.637860+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-02T07:30:12Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-02T07:30:12Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-02T07:30:12Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-02T07:30:10.637860+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
 function syncCred(k){try{return localStorage.getItem("icc.sync."+k)||"";}catch(_){return "";}}
 function syncCredSet(k,v){try{localStorage.setItem("icc.sync."+k,v);}catch(_){}}
 const SYNC_INTERVAL=15*60*1000;
@@ -921,6 +921,21 @@ function syncToast(msg,type){
   el.textContent=msg; el.className="sync-toast "+(type||"")+" show";
   clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove("show"),4000);
 }
+async function zdProxy(endpoint,auto){
+  const hdrs={};
+  const email=syncCred("zdEmail"), pass=syncCred("zdPass");
+  if(email && pass) hdrs["x-zd-auth"]="Basic "+btoa(email+":"+pass);
+  try{
+    const r=await fetch("/api/zendesk?endpoint="+endpoint,{headers:hdrs});
+    if(r.ok) return endpoint==="me"?true:await r.json();
+    if(r.status===401) return 401;
+    const b=await r.json().catch(()=>({}));
+    return b.error||("HTTP "+r.status);
+  }catch(e){
+    if(!auto) syncToast("Zendesk proxy not available — deploy with Vercel serverless","err");
+    return null;
+  }
+}
 async function syncSource(idx,auto){
   const src=SOURCES[idx]; if(!src||src._syncing) return;
   src._syncing=true; renderFresh();
@@ -945,47 +960,17 @@ async function syncSource(idx,auto){
         syncToast("Opened Jira board",""); }
     }
     else if(src.name.includes("Zendesk") && src.login){
-      const email=syncCred("zdEmail"), pass=syncCred("zdPass");
-      if(email && pass){
-        try{
-          const r=await fetch("https://grupoingenium.zendesk.com/api/v2/users/me.json",{
-            headers:{"Authorization":"Basic "+btoa(email+":"+pass)},
-            mode:"cors"});
-          if(r.ok){ src.at=new Date().toISOString(); syncToast("Zendesk session OK","ok"); }
-          else if(r.status===401){ syncToast("Zendesk login failed — check credentials in ⚙","err"); }
-          else { src.at=new Date().toISOString(); syncToast("Zendesk: status "+r.status,""); }
-        }catch(e){
-          try{
-            const r2=await fetch("https://grupoingenium.zendesk.com/api/v2/users/me.json",{
-              headers:{"Authorization":"Basic "+btoa(email+"/token:"+pass)},
-              mode:"cors"});
-            if(r2.ok){ src.at=new Date().toISOString(); syncToast("Zendesk session OK (token auth)","ok"); }
-            else { if(!auto) syncToast("Zendesk: CORS blocked — open ⚙ and sign in manually","err"); }
-          }catch(_){ if(!auto) syncToast("Zendesk: CORS blocked — sign in manually","err"); }
-        }
-      } else if(!auto){ window.open(src.url,"_blank","noopener"); syncToast("Set Zendesk credentials in ⚙ for auto-login",""); }
+      const ok=await zdProxy("me",auto);
+      if(ok===true){ src.at=new Date().toISOString(); syncToast("Zendesk session OK","ok"); }
+      else if(ok===401){ syncToast("Zendesk login failed — check credentials in ⚙ or Vercel env vars","err"); }
+      else if(!auto && ok!==null) syncToast("Zendesk login: "+(ok||"error"),"err");
     }
     else if(src.name.includes("Zendesk")){
-      const email=syncCred("zdEmail"), pass=syncCred("zdPass");
-      if(email && pass){
-        try{
-          const r=await fetch("https://grupoingenium.zendesk.com/api/v2/requests.json?sort_by=updated_at&per_page=5",{
-            headers:{"Authorization":"Basic "+btoa(email+":"+pass)},
-            mode:"cors"});
-          if(r.ok){ const d=await r.json(); src.at=new Date().toISOString();
-            syncToast("Zendesk synced: "+(d.requests?.length||0)+" recent tickets","ok"); }
-          else { if(!auto) syncToast("Zendesk API: "+r.status,"err"); }
-        }catch(e){
-          try{
-            const r2=await fetch("https://grupoingenium.zendesk.com/api/v2/requests.json?sort_by=updated_at&per_page=5",{
-              headers:{"Authorization":"Basic "+btoa(email+"/token:"+pass)},
-              mode:"cors"});
-            if(r2.ok){ const d=await r2.json(); src.at=new Date().toISOString();
-              syncToast("Zendesk synced (token): "+(d.requests?.length||0)+" recent tickets","ok"); }
-            else { if(!auto) syncToast("Zendesk: CORS blocked — run minos_daily_sync.py","err"); }
-          }catch(_){ if(!auto) syncToast("Zendesk: CORS blocked — run minos_daily_sync.py","err"); }
-        }
-      } else if(!auto){ window.open(src.url,"_blank","noopener"); syncToast("Set Zendesk credentials in ⚙ for auto-sync",""); }
+      const ok=await zdProxy("requests",auto);
+      if(ok && typeof ok==="object"){ src.at=new Date().toISOString();
+        syncToast("Zendesk synced: "+(ok.requests?.length||0)+" tickets","ok"); }
+      else if(ok===401){ syncToast("Zendesk auth failed — check credentials in ⚙ or Vercel env vars","err"); }
+      else if(!auto && ok!==null) syncToast("Zendesk sync: "+(ok||"error"),"err");
     }
   }catch(e){ if(!auto) syncToast("Sync error: "+(e.message||e),"err"); }
   src._syncing=false; renderFresh();
