@@ -464,7 +464,7 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
 </div>
 
 <script>
-const SNAPSHOT = "2026-10-02T11:30:00Z";  // Gmail read time (Zendesk/Minos sync 03:30 UTC)  // Zendesk/Minos sync time
+const SNAPSHOT = "2026-10-02T12:00:00Z";  // Gmail read time (Zendesk/Minos sync 03:30 UTC)  // Zendesk/Minos sync time
 const GROUPS = {
   A:"No update 7+ days",
   B:"Waiting on Holafly",
@@ -895,7 +895,7 @@ function addTopScroll(box){
 function refreshTopScroll(){ document.querySelectorAll(".tbl,.tbl2").forEach(b=>{ addTopScroll(b); b._sizeTop && b._sizeTop(); }); }
 
 // ---------- #4 data freshness ----------
-const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-02T11:30:10.253955+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-02T11:30:11Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-02T11:30:11Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-02T11:30:11Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-02T11:30:10.253955+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
+const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-02T12:00:10.861021+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-02T12:00:12Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-02T12:00:12Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-02T12:00:12Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-02T12:00:10.861021+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
 function syncCred(k){try{return localStorage.getItem("icc.sync."+k)||"";}catch(_){return "";}}
 function syncCredSet(k,v){try{localStorage.setItem("icc.sync."+k,v);}catch(_){}}
 const SYNC_INTERVAL=15*60*1000;
