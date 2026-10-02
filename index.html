@@ -287,7 +287,15 @@ select.wkbtn{font:inherit;font-size:13px;font-weight:700;padding:7px 12px;border
 .clearf{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer;min-height:32px}
 
 .fresh{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
-.fr{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 12px;font-size:13px;border:1px solid var(--line);background:var(--surface)}
+.fr{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 12px;font-size:13px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font:inherit;font-size:13px;color:inherit;transition:border-color .15s}
+.fr:hover{border-color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.fr.syncing{opacity:.7;pointer-events:none}
+.fr.syncing i{animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sync-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 18px;font-size:13px;box-shadow:0 4px 16px rgba(0,0,0,.15);z-index:9999;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90vw;text-align:center}
+.sync-toast.show{opacity:1}
+.sync-toast.ok{border-color:var(--fresh);color:var(--fresh)}
+.sync-toast.err{border-color:var(--stale);color:var(--stale)}
 .fr i{width:9px;height:9px;border-radius:50%;display:inline-block}
 .fr.ok i{background:var(--fresh)} .fr.warn i{background:var(--warn)} .fr.bad i{background:var(--stale)}
 .fr.bad{border-color:var(--stale);color:var(--stale);font-weight:700}
@@ -435,7 +443,7 @@ select.wkbtn{font:inherit;font-size:13px;font-weight:700;padding:7px 12px;border
 </div>
 
 <script>
-const SNAPSHOT = "2026-10-02T05:30:00Z";  // Gmail read time (Zendesk/Minos sync 12:11 UTC)  // Zendesk/Minos sync time
+const SNAPSHOT = "2026-10-02T06:00:00Z";  // Gmail read time (Zendesk/Minos sync 03:30 UTC)  // Zendesk/Minos sync time
 const GROUPS = {
   A:"No update 7+ days",
   B:"Waiting on Holafly",
@@ -759,7 +767,7 @@ function renderVolume(){
   const weeks=[]; for(let w=CUR_WEEK-11; w<=CUR_WEEK; w++) weeks.push(w);
   const data=weeks.map(w=>({w, list:ALL.filter(x=>x.week===w)}));
   const max=Math.max(1,...data.map(d=>d.list.length));
-  document.getElementById("volSub").textContent=`Last 12 weeks, week commencing. ${ALL.length} incidents on record from all partners: JSC Zendesk/Minos (all tickets, synced 30 Sep 12:11 UTC), CMI (Gmail), Jira CAN/JSMCA and the RCA Tracker; JSC Golem alarms, change requests and queries excluded; with duplicates across sources merged (same ticket number, linked tickets, or same country within 2 days). Click a week to open it.`;
+  document.getElementById("volSub").textContent=`Last 12 weeks, week commencing. ${ALL.length} incidents on record from all partners: JSC Zendesk/Minos (all tickets, synced 2 Oct 03:30 UTC), CMI (Gmail), Jira CAN/JSMCA and the RCA Tracker; JSC Golem alarms, change requests and queries excluded; with duplicates across sources merged (same ticket number, linked tickets, or same country within 2 days). Click a week to open it.`;
   document.getElementById("volChart").innerHTML=data.map(d=>{ const c=sevCounts(d.list);
     const segs=[1,2,3,4,0].filter(k=>c[k]).map(k=>`<div class="vseg" style="height:${c[k]/max*200}px;background:${SEVCOL[k]}" title="${SEV_LABEL[k]}: ${c[k]}"></div>`).join("");
     return `<div class="vcol${d.w===SEL_WEEK?" vsel":""}" data-w="${d.w}" role="button" tabindex="0" aria-label="Week ${d.w}: ${d.list.length} incidents"${d.w===SEL_WEEK?' aria-current="true"':''}><div class="tot">${d.list.length||""}</div>${segs}</div>`; }).join("");
@@ -866,15 +874,54 @@ function addTopScroll(box){
 function refreshTopScroll(){ document.querySelectorAll(".tbl,.tbl2").forEach(b=>{ addTopScroll(b); b._sizeTop && b._sizeTop(); }); }
 
 // ---------- #4 data freshness ----------
-const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-02T05:30:17.551598+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-02T05:30:19Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-02T05:30:19Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-02T05:30:19Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-02T05:30:17.551598+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
+const SOURCES = [{"name": "Zendesk/Minos sync", "at": "2026-10-02T06:00:14.965721+00:00", "warnH": 24, "badH": 36, "note": "Session expired: run with --login and sign in again."}, {"name": "Gmail (primary for updates)", "at": "2026-10-02T06:00:16Z", "warnH": 12, "badH": 24, "note": "partner mailboxes read by Claude"}, {"name": "Email feed (Apps Script)", "at": "2026-10-02T06:00:16Z", "warnH": 1, "badH": 6, "note": "every 10 min"}, {"name": "Jira CAN/JSMCA", "at": "2026-10-02T06:00:16Z", "warnH": 24, "badH": 48, "note": "read at last build"}, {"name": "Zendesk login", "at": "2026-10-02T06:00:14.965721+00:00", "warnH": 24, "badH": 48, "note": "state LOGIN_REQUIRED", "login": true}];
 function renderFresh(){
   const now=Date.now();
-  document.getElementById("fresh").innerHTML = SOURCES.map(x=>{ const h=(now-new Date(x.at))/3600000;
+  document.getElementById("fresh").innerHTML = SOURCES.map((x,i)=>{ const h=(now-new Date(x.at))/3600000;
     const cls = h>=x.badH?"bad":h>=x.warnH?"warn":"ok";
     const age = h<1? Math.round(h*60)+" min ago" : h<48? Math.round(h)+" h ago" : Math.round(h/24)+" days ago";
-    const tip = cls==="bad" ? (x.login?" · run the sync with --login":" · refresh needed") : "";
-    return `<span class="fr ${cls}" title="${esc(x.note)}"><i></i>${esc(x.name)}: ${age}${tip}</span>`; }).join("");
+    const tip = cls==="bad" ? (x.login?" · run the sync with --login":" · ↻ click to sync") : " · ↻ click to sync";
+    return `<button type="button" class="fr ${cls}${x._syncing?" syncing":""}" title="${esc(x.note)}" data-sync="${i}"><i></i>${x._syncing?"Syncing…":esc(x.name)+": "+age+tip}</button>`; }).join("");
 }
+function syncToast(msg,type){
+  let el=document.getElementById("syncToast");
+  if(!el){el=document.createElement("div");el.id="syncToast";el.className="sync-toast";document.body.appendChild(el);}
+  el.textContent=msg; el.className="sync-toast "+(type||"")+" show";
+  clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove("show"),4000);
+}
+async function syncSource(idx){
+  const src=SOURCES[idx]; if(!src||src._syncing) return;
+  src._syncing=true; renderFresh();
+  try{
+    if(src.name.includes("Email feed")){
+      if(src.webAppUrl){
+        const r=await fetch(src.webAppUrl,{mode:"no-cors"}); src.at=new Date().toISOString();
+        syncToast("Email feed sync triggered","ok");
+      } else { window.open(src.url,"_blank","noopener"); syncToast("Opened Apps Script — run sync() manually",""); }
+    }
+    else if(src.name.includes("Gmail")){
+      if(MCP){ try{
+        const res=await MCP.callTool(GMAIL,"search_email",{query:"from:soportenoc@jscingenium.com OR from:ckhiod.com OR from:chinamobile.com newer_than:1d",maxResults:10});
+        src.at=new Date().toISOString(); syncToast("Gmail: "+(res.payload?.messages?.length||0)+" recent emails found","ok");
+      }catch(e){ syncToast("Gmail sync failed: "+fuErrText(e),"err"); }}
+      else { window.open(src.url,"_blank","noopener"); syncToast("Gmail connector not available — opened Gmail",""); }
+    }
+    else if(src.name.includes("Jira")){
+      window.open(src.url,"_blank","noopener"); src.at=new Date().toISOString();
+      syncToast("Opened Jira board — check for updates","");
+    }
+    else if(src.name.includes("Zendesk") && src.login){
+      window.open(src.url,"_blank","noopener");
+      syncToast("Opened Zendesk login — sign in to refresh session","");
+    }
+    else if(src.name.includes("Zendesk")){
+      window.open(src.url,"_blank","noopener"); src.at=new Date().toISOString();
+      syncToast("Opened Zendesk — run minos_daily_sync.py locally to pull data","");
+    }
+  }catch(e){ syncToast("Sync error: "+(e.message||e),"err"); }
+  src._syncing=false; renderFresh();
+}
+document.getElementById("fresh").addEventListener("click",e=>{ const b=e.target.closest("[data-sync]"); if(b) syncSource(parseInt(b.dataset.sync,10)); });
 // ---------- #1 waiting on Holafly ----------
 function renderWaitUs(){
   const now=Date.now();
