@@ -950,20 +950,23 @@ async function syncSource(idx,auto){
       } else if(!auto){ window.open(src.url,"_blank","noopener"); syncToast("Set Apps Script URL in ⚙ settings for auto-sync",""); }
     }
     else if(src.name.includes("Gmail")){
+      let gOk=false;
       if(MCP){ try{
         const res=await MCP.callTool(GMAIL,"search_email",{query:"from:soportenoc@jscingenium.com OR from:ckhiod.com OR from:chinamobile.com newer_than:1d",maxResults:10});
-        src.at=new Date().toISOString(); syncToast("Gmail: "+(res.payload?.messages?.length||0)+" recent emails found","ok");
-      }catch(e){ if(!auto) syncToast("Gmail sync failed: "+fuErrText(e),"err"); }}
-      else if(!auto){ window.open(src.url,"_blank","noopener"); src.at=new Date().toISOString();
-        syncToast("Gmail connector not available — opened Gmail",""); }
+        src.at=new Date().toISOString(); gOk=true;
+        syncToast("Gmail: "+(res.payload?.messages?.length||0)+" recent emails found","ok");
+      }catch(e){}}
+      if(!gOk && !auto){ window.open(src.url,"_blank","noopener"); src.at=new Date().toISOString();
+        syncToast("Opened Gmail",""); }
     }
     else if(src.name.includes("Jira")){
+      let jOk=false;
       if(MCP){ try{
         const res=await MCP.callTool("Jira","search_issues",{jql:"project in (CAN,JSMCA) AND updated >= -1d",maxResults:10});
-        src.at=new Date().toISOString();
+        src.at=new Date().toISOString(); jOk=true;
         syncToast("Jira: "+(res.payload?.issues?.length||0)+" recently updated issues","ok");
-      }catch(e){ if(!auto) syncToast("Jira sync failed: "+fuErrText(e),"err"); }}
-      else if(!auto){ window.open(src.url,"_blank","noopener"); src.at=new Date().toISOString();
+      }catch(e){}}
+      if(!jOk && !auto){ window.open(src.url,"_blank","noopener"); src.at=new Date().toISOString();
         syncToast("Opened Jira board",""); }
     }
     else if(src.name.includes("Zendesk") && src.login){
