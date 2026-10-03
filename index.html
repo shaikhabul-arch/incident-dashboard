@@ -1056,6 +1056,16 @@ const FU_SEED = {                     // drafts already prepared in Gmail on 25 
 };
 const FU_BUSY = {}, FU_MSG = {};
 let MCP = null, DB = null;
+function fuComposeUrl(r){
+  const m=fuEmail(r), first=(r.o||"").split(" ")[0]||"team", zd=(r.t.match(/\b[5-6]\d{5}\b/)||[])[0];
+  const ticket=zd?"Zendesk #"+zd:r.t;
+  const body="Hi "+first+",\n\nThe following incident needs an update. Could you please share the current status and complete the suggested action by the next working day, 12:00 CET?\n\n"+
+    "Ticket: "+ticket+"\nIncident: "+r.inc+"\nSeverity: "+r.sev+"\nStatus: "+r.st2+
+    "\nLast update: "+(r.lt||"").slice(0,200)+(r.lu?" ("+fmtDate(r.lu)+")":"")+"\nDays idle: "+(r.d??"—")+
+    "\nWaiting for: "+(r.w||"—")+"\nSuggested action: "+(r.f||"—")+
+    "\n\nIf this is resolved, please close the partner ticket and the Jira and reply with the closure note.\n\nThanks and regards,\nArief\nCarriers Incident Management";
+  return "https://mail.google.com/mail/?authuser=shaikh.abul@holafly.com&view=cm&to="+encodeURIComponent(m.to[0])+"&su="+encodeURIComponent(m.subject)+"&body="+encodeURIComponent(body);
+}
 const fuId = r => (r.t.match(/^(JSC|CMI)\s+(\S+)/)||[]).slice(1).join("-") || r.t.replace(/[^A-Za-z0-9]+/g,"-");
 const fuEligible = r => r.e && !/Pharos|proactive monitoring|Unassigned|Not verified/i.test(r.o) && !(r.g==="L");
 const fuState = r => FU[fuId(r)] || FU_SEED[fuId(r)] || null;
@@ -1104,7 +1114,7 @@ function fuDraftCell(r){
   const id=fuId(r), st=fuState(r), msg=FU_MSG[id]?`<div class="fumsg">${esc(FU_MSG[id])}</div>`:"";
   if(st&&st.sentAt) return `<span class="fm fm-sent">Follow up mail sent to incident owner</span><br><span class="muted" style="font-size:12px">${fmtDate(st.sentAt)} to ${esc(st.to||r.e)}</span>`;
   if(st&&st.draftId) return `<span class="fm fm-draft">Draft ready, not sent</span><br><span class="muted" style="font-size:12px">${fmtDate(st.createdAt)} to ${esc(st.to||r.e)}</span><br><a class="fulink" href="${esc(st.viewUrl||"https://mail.google.com/mail/#drafts")}" target="_blank" rel="noopener">Open draft to verify ↗</a>${msg}`;
-  if(!MCP) return `<span class="muted">Open this page in claude.ai with Gmail connected to prepare a draft.</span>`;
+  if(!MCP) return `<a class="fulink" href="${esc(fuComposeUrl(r))}" target="_blank" rel="noopener">✉ Compose in Gmail ↗</a>`;
   return `<button type="button" class="btn2 fubtn" data-fu="prep" data-row="${esc(id)}" ${FU_BUSY[id]?"disabled":""}>${FU_BUSY[id]?"Preparing…":"✉ Prepare draft"}</button>${msg}`;
 }
 function fuSendCell(r){
