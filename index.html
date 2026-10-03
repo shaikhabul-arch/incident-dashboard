@@ -1121,7 +1121,7 @@ function fuSendCell(r){
   if(!fuEligible(r)) return '<span class="muted">—</span>';
   const id=fuId(r), st=fuState(r);
   if(st&&st.sentAt) return `<span class="muted">Sent ${fmtDate(st.sentAt)}</span>`;
-  if(!(st&&st.draftId)) return `<span class="muted">Prepare the draft first</span>`;
+  if(!(st&&st.draftId)){ if(!MCP) return `<a class="fulink" href="${esc(fuComposeUrl(r))}" target="_blank" rel="noopener">➤ Send via Gmail ↗</a>`; return `<span class="muted">Prepare the draft first</span>`; }
   if(!MCP) return `<a class="fulink" href="${esc(st.viewUrl||"https://mail.google.com/mail/#drafts")}" target="_blank" rel="noopener">Send from Gmail ↗</a>`;
   return `<button type="button" class="btn2 fusend" data-fu="send" data-row="${esc(id)}" ${FU_BUSY[id]?"disabled":""}>${FU_BUSY[id]?"Sending…":"➤ Send mail"}</button>`;
 }
